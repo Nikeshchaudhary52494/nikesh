@@ -9,6 +9,7 @@ export const projects = [
     imageUrl: "replino.png",
     githubUrl: "https://github.com/Nikeshchaudhary52494/replino.ai.git",
     liveUrl: "https://replino.vercel.app/",
+    homeUrl: "yuta.png",
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ export const projects = [
     tools: ["Spring Boot", "PostgreSQL", "RabbitMQ", "Nginx", "Docker Compose"],
     githubUrl: "https://github.com/Nikeshchaudhary52494/microfeed.git",
     liveUrl: "https://microfeed.com",
+    homeUrl: "chainsaw.png",
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ export const projects = [
     imageUrl: "byte.png",
     githubUrl: "https://github.com/Nikeshchaudhary52494/byte.git",
     liveUrl: "https://byte-ecommerce.vercel.app/",
+    homeUrl: "aot.png",
   },
   {
     id: 4,
@@ -52,6 +55,7 @@ export const projects = [
     imageUrl: "harmonic.png",
     githubUrl: "https://github.com/Nikeshchaudhary52494/Harmonic.git",
     liveUrl: "https://harmonic-music.vercel.app/",
+    homeUrl: "mha.png",
   },
   {
     id: 5,
@@ -62,6 +66,7 @@ export const projects = [
     tools: ["Java 21", "Spring Boot 3", "Spring Security", "MySQL", "JWT"],
     githubUrl: "https://github.com/Nikeshchaudhary52494/authify.git",
     liveUrl: "https://authify.com",
+    homeUrl: "deathnote.png",
   },
   {
     id: 6,
@@ -82,5 +87,6 @@ export const projects = [
     imageUrl: "ping.png",
     githubUrl: "https://github.com/Nikeshchaudhary52494/ping.git",
     liveUrl: "https://ping-messenger.vercel.app/",
+    homeUrl: "demons.png",
   },
 ];

@@ -78,15 +78,22 @@ export default function Home() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`w-96 h-20 flex items-center justify-center gap-10 hover:bg-red-500 hover:scale-110 text-white transition-all duration-300 ease-in-out
-                ${
-                  hoveredIndex === index
-                    ? "bg-red-500 scale-110"
-                    : "bg-gray-500/20"
-                }`}
+              className={`w-96 h-20 flex items-center justify-center gap-10 text-white font-semibold transition-all duration-300 ease-in-out relative overflow-hidden cursor-pointer
+        ${hoveredIndex === index ? "scale-110" : "scale-100"}`}
+              style={{
+                backgroundImage: `url(${project.homeUrl})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
               onClick={() => handleProjectSelect(index)}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              {project.name}
+              <div
+                className={`absolute inset-0 transition-all duration-300 ease-in-out  ${
+                  hoveredIndex === index ? "bg-transparent" : "bg-black/50"
+                } `}
+              ></div>
             </div>
           ))}
         </div>
