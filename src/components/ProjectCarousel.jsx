@@ -80,7 +80,7 @@ function ProjectCarousel({
   };
 
   return (
-    <div className="fixed flex flex-col z-10 top-0 h-screen items-center justify-center w-1/2 overflow-hidden">
+    <div className="fixed sm:flex flex-col hidden z-10 top-0 h-screen items-center justify-center w-1/2 overflow-hidden">
       <div className="relative w-full h-full flex flex-col items-center justify-center">
         <motion.div
           key={`prev-${activeIndex}`}

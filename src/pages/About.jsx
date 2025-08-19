@@ -2,79 +2,27 @@ import { IoIosClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { FaStarOfLife } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { sections } from "../data/data";
 
 export default function About() {
   const navigate = useNavigate();
 
-  const sections = [
-    {
-      title: "Location",
-      content: ["India", "28° 36′ N 77° 13′ E"],
-    },
-    {
-      title: "Socials",
-      content: [
-        { text: "Github", href: "#" },
-        { text: "LinkedIn", href: "#" },
-        { text: "Twitter", href: "#" },
-      ],
-      isLinks: true,
-    },
-    {
-      title: "Stack",
-      content: [
-        // Languages
-        "JavaScript",
-        "TypeScript",
-        "Java",
-        "Python",
-
-        // Frontend
-        "React",
-        "Next.js",
-        "Tailwind CSS",
-
-        // Backend
-        "Node.js",
-        "Express",
-        "Spring Boot",
-
-        // Databases
-        "MongoDB",
-        "PostgreSQL",
-
-        // APIs & Auth
-        "REST",
-        "GraphQL",
-        "gRPC",
-        "Clerk",
-
-        // Infra & DevOps
-        "AWS (EC2, Lambda, S3)",
-        "Docker",
-        "Redis",
-        "RabbitMQ",
-        "Kafka",
-      ],
-    },
-  ];
-
   return (
-    <div className="uppercase text-[10px] font-semibold h-screen overflow-hidden flex flex-col gap-20 p-5">
+    <div className="uppercase text-[10px] font-semibold min-h-screen sm:h-screen sm:overflow-hidden flex flex-col gap-20 p-5">
       <div className="flex gap-20 items-center">
-        <h1 className="text-6xl font-normal monoton">about</h1>
+        <h1 className="sm:text-6xl text-3xl font-normal monoton">about</h1>
         <div
           onClick={() => navigate(-1)}
           className="gap-5 flex items-center cursor-pointer transition-all duration-100"
         >
-          <div className="w-20 border-t border-black"></div>
+          <div className="w-20 border-t hidden sm:block border-black" />
           <IoIosClose size={24} />
           <p className="hover:underline">close</p>
         </div>
       </div>
 
-      <div className="flex flex-row justify-between items-start">
-        <div className="w-1/2 leading-relaxed tracking-wide">
+      <div className="flex sm:flex-row justify-between flex-col gap-10 items-start">
+        <div className="sm:w-1/2 leading-relaxed tracking-wide">
           <p>
             I’m Nikesh, a developer focused on creating motion-based websites
             that combine aesthetics and performance. I care deeply about

@@ -90,3 +90,56 @@ export const projects = [
     homeUrl: "demons.png",
   },
 ];
+
+export const sections = [
+  {
+    title: "Location",
+    content: ["India", "28° 36′ N 77° 13′ E"],
+  },
+  {
+    title: "Socials",
+    content: [
+      { text: "Github", href: "#" },
+      { text: "LinkedIn", href: "#" },
+      { text: "Twitter", href: "#" },
+    ],
+    isLinks: true,
+  },
+  {
+    title: "Stack",
+    content: [
+      // Languages
+      "JavaScript",
+      "TypeScript",
+      "Java",
+      "Python",
+
+      // Frontend
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+
+      // Backend
+      "Node.js",
+      "Express",
+      "Spring Boot",
+
+      // Databases
+      "MongoDB",
+      "PostgreSQL",
+
+      // APIs & Auth
+      "REST",
+      "GraphQL",
+      "gRPC",
+      "Clerk",
+
+      // Infra & DevOps
+      "AWS (EC2, Lambda, S3)",
+      "Docker",
+      "Redis",
+      "RabbitMQ",
+      "Kafka",
+    ],
+  },
+];

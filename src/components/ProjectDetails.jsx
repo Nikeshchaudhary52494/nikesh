@@ -14,34 +14,45 @@ export default function ProjectDetails({
   return (
     <div className="uppercase p-5 text-[10px] flex font-semibold flex-col gap-8 overflow-hidden h-screen">
       <div className="flex justify-between items-center">
-        <h1 className="text-5xl monoton font-normal tracking-wide">
+        <h1 className="sm:text-6xl text-3xl monoton font-normal tracking-wide">
           {projects[projectSelected].name}
         </h1>
-        <div className="text-6xl font-bold">0{1 + projectSelected}</div>
+        <div className="sm:text-6xl text-3xl font-bold">
+          0{1 + projectSelected}
+        </div>
       </div>
 
-      <div className="flex justify-center items-center flex-1 gap-5 relative">
-        <div className="w-1/4 flex h-1/2 flex-col pr-5">
-          <div className="w-[75%] flex flex-col gap-10">
-            <div className="flex justify-between ">
-              <p className="text-gray-500">00{1 + projectSelected}</p>
+      <div className="sm:hidden">
+        <img
+          src={projects[projectSelected].imageUrl}
+          alt={projects[projectSelected].name}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="flex justify-center items-center sm:flex-row flex-col-reverse sm:flex-1 gap-5 relative">
+        <div className="sm:w-1/4 flex h-1/2 flex-col sm:pr-5">
+          <div className="sm:w-[75%] flex sm:flex-col  sm:gap-10">
+            <div className="sm:flex justify-between hidden">
+              <p className="text-gray-500 ">00{1 + projectSelected}</p>
               <p>{projects[projectSelected].name}</p>
             </div>
-            <p className="text-justify leading-relaxed ">
-              {projects[projectSelected].description}
-            </p>
-            <div className="flex justify-between">
-              <p className="text-gray-500">Tools</p>
-              <div className="text-right">
-                {projects[projectSelected].tools.map((tool, i) => (
-                  <p key={i}>{tool}</p>
-                ))}
+            <div className="flex flex-col gap-10">
+              <p className="text-justify  leading-relaxed ">
+                {projects[projectSelected].description}
+              </p>
+              <div className="flex gap-5 flex-col sm:flex-row justify-between">
+                <p className="text-gray-500">Tools</p>
+                <div className="sm:text-right">
+                  {projects[projectSelected].tools.map((tool, i) => (
+                    <p key={i}>{tool}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="w-1/2"></div>
+        <div className="w-1/2 hidden sm:block" />
         <ProjectCarousel
           projects={projects}
           setProjectSelected={setProjectSelected}
@@ -49,7 +60,7 @@ export default function ProjectDetails({
           liveUrlRef={liveUrlRef}
         />
 
-        <div className="w-1/4 flex flex-col justify-between pb-15 h-1/2 items-end">
+        <div className="sm:w-1/4 flex w-full sm:flex-col justify-between flex-row sm:pb-15 sm:h-1/2 h-10 sm:items-end">
           <div
             onClick={() =>
               window.open(projects[projectSelected].githubUrl, "_blank")
@@ -59,7 +70,7 @@ export default function ProjectDetails({
           >
             <p className="hover:underline cursor-pointer">Open</p>
             <BiExpandAlt className="text-base" />
-            <div className="w-8 border-t border-black"></div>
+            <div className="w-8 border-t border-black hidden sm:block"></div>
           </div>
           <div
             onClick={() =>
@@ -70,7 +81,7 @@ export default function ProjectDetails({
           >
             <p className="hover:underline cursor-pointer">View Live</p>
             <GoArrowUpRight className="text-base" />
-            <div className="w-8 border-t border-black"></div>
+            <div className="w-8 border-t border-black hidden sm:block"></div>
           </div>
         </div>
       </div>
