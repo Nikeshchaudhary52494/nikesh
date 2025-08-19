@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { HiArrowTurnRightDown } from "react-icons/hi2";
 import ProjectDetails from "../components/ProjectDetails";
 import { Link } from "react-router-dom";
+import { projects } from "../data/data";
 
 export default function Home() {
-  const projects = ["Microfeed", "ping", "harmonic", "byte", "replino.ai"];
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [projectSelected, setProjectSelected] = useState(null);
@@ -68,7 +68,7 @@ export default function Home() {
                 onClick={() => handleProjectSelect(index)}
               >
                 <span>{101 + index}</span>
-                <span>{project}</span>
+                <span>{project.name}</span>
               </div>
             ))}
           </div>
@@ -86,7 +86,7 @@ export default function Home() {
                 }`}
               onClick={() => handleProjectSelect(index)}
             >
-              {project}
+              {project.name}
             </div>
           ))}
         </div>

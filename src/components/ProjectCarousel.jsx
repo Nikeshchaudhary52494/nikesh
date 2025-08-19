@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import { motion, AnimatePresence, scale } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-function ProjectCarousel({ projects, setProjectSelected }) {
+function ProjectCarousel({
+  projects,
+  setProjectSelected,
+  githubUrlRef,
+  liveUrlRef,
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -18,11 +23,13 @@ function ProjectCarousel({ projects, setProjectSelected }) {
   const handleNext = () => {
     setDirection(1);
     setActiveIndex((prev) => (prev + 1) % projects.length);
+    setProjectSelected((prev) => (prev + 1) % projects.length);
   };
 
   const handlePrev = () => {
     setDirection(-1);
     setActiveIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+    setProjectSelected((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
   };
 
   useEffect(() => {
@@ -35,7 +42,10 @@ function ProjectCarousel({ projects, setProjectSelected }) {
         (nextCardRef.current && nextCardRef.current.contains(event.target)) ||
         (previousButtonRef.current &&
           previousButtonRef.current.contains(event.target)) ||
-        (nextButtonRef.current && nextButtonRef.current.contains(event.target));
+        (nextButtonRef.current &&
+          nextButtonRef.current.contains(event.target)) ||
+        (githubUrlRef.current && githubUrlRef.current.contains(event.target)) ||
+        (liveUrlRef.current && liveUrlRef.current.contains(event.target));
 
       if (!clickedInside) {
         setProjectSelected(null);
@@ -78,18 +88,28 @@ function ProjectCarousel({ projects, setProjectSelected }) {
           animate={{ y: 0, opacity: 0.5, scale: 0.9 }}
           exit={{ y: -50, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute -top-20 w-[50%] h-[200px] bg-gray-500/20 cursor-pointer"
+          className="absolute -top-20 w-[50%] h-[200px] bg-gray-500/20 cursor-pointer flex items-center justify-center"
           onClick={handlePrev}
           ref={previosCardRef}
         >
-          <img
-            src={
-              projects[(activeIndex - 1 + projects.length) % projects.length]
-                .image
-            }
-            alt="preview"
-            className="w-full h-full object-cover"
-          />
+          {projects[(activeIndex - 1 + projects.length) % projects.length]
+            .imageUrl ? (
+            <img
+              src={
+                projects[(activeIndex - 1 + projects.length) % projects.length]
+                  .imageUrl
+              }
+              alt="preview"
+              className="w-full h-full aspect-video object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-black flex items-center justify-center text-white text-lg font-semibold">
+              {
+                projects[(activeIndex - 1 + projects.length) % projects.length]
+                  .name
+              }
+            </div>
+          )}
         </motion.div>
 
         <MdOutlineKeyboardArrowUp
@@ -110,13 +130,19 @@ function ProjectCarousel({ projects, setProjectSelected }) {
               animate="center"
               exit="exit"
               transition={{ duration: 0.6 }}
-              className="w-full h-full bg-gray-500/20"
+              className="w-full h-full flex items-center justify-center"
             >
-              <img
-                src={projects[activeIndex].image}
-                alt="active"
-                className="w-full h-full object-cover"
-              />
+              {projects[activeIndex].imageUrl ? (
+                <img
+                  src={projects[activeIndex].imageUrl}
+                  alt="active"
+                  className="w-full h-full object-contain aspect-video"
+                />
+              ) : (
+                <div className="w-full h-full bg-black flex items-center justify-center text-white text-5xl font-bold">
+                  {projects[activeIndex].name}
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -134,15 +160,21 @@ function ProjectCarousel({ projects, setProjectSelected }) {
           animate={{ y: 0, opacity: 0.5, scale: 0.9 }}
           exit={{ y: 50, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute -bottom-20 w-[50%] h-[200px] bg-gray-500/20 cursor-pointer"
+          className="absolute -bottom-20 w-[50%] h-[200px] bg-gray-500/20 cursor-pointer flex items-center justify-center"
           onClick={handleNext}
           ref={nextCardRef}
         >
-          <img
-            src={projects[(activeIndex + 1) % projects.length].image}
-            alt="preview"
-            className="w-full h-full object-cover"
-          />
+          {projects[(activeIndex + 1) % projects.length].imageUrl ? (
+            <img
+              src={projects[(activeIndex + 1) % projects.length].imageUrl}
+              alt="preview"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-black flex items-center justify-center text-white text-lg font-semibold">
+              {projects[(activeIndex + 1) % projects.length].name}
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
