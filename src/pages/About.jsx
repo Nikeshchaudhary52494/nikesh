@@ -1,6 +1,7 @@
 import { IoIosClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { FaStarOfLife } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export default function About() {
   const navigate = useNavigate();
@@ -86,29 +87,55 @@ export default function About() {
             keep my inspiration alive.
           </p>
         </div>
-
         <div className="flex gap-20">
           {sections.map((section, idx) => (
-            <div key={idx}>
+            <motion.div
+              key={idx}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.1 },
+                },
+              }}
+            >
               <h2 className="mb-2 text-gray-500">{section.title}</h2>
+
               {section.isLinks ? (
                 <ul>
                   {section.content.map((link, i) => (
-                    <li key={i}>
+                    <motion.li
+                      key={i}
+                      variants={{
+                        hidden: { y: -30, opacity: 0 },
+                        visible: { y: 0, opacity: 1 },
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <a href={link.href} className="hover:underline">
                         {link.text}
                       </a>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               ) : (
                 <ul>
                   {section.content.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <motion.li
+                      key={i}
+                      variants={{
+                        hidden: { y: -30, opacity: 0 },
+                        visible: { y: 0, opacity: 1 },
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {item}
+                    </motion.li>
                   ))}
                 </ul>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

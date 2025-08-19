@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HiArrowTurnRightDown } from "react-icons/hi2";
 import ProjectDetails from "../components/ProjectDetails";
 import { Link } from "react-router-dom";
@@ -8,10 +9,7 @@ export default function Home() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [projectSelected, setProjectSelected] = useState(null);
-
-  const handleProjectSelect = (index) => {
-    setProjectSelected(index);
-  };
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,6 +18,15 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowIntro(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleProjectSelect = (index) => {
+    setProjectSelected(index);
+  };
 
   if (projectSelected !== null) {
     return (
@@ -32,79 +39,150 @@ export default function Home() {
   }
 
   return (
-    <div className="uppercase p-8 text-[10px] font-semibold flex flex-col gap-10 overflow-hidden h-screen">
-      <div className="flex justify-between">
-        <h1 className="text-6xl font-normal monoton">
-          Nikesh <br />
-          Chaudhary
-        </h1>
-        <div className="gap-10 flex flex-col transition-all duration-100">
-          <div>
-            <p className="hover:underline">download resume</p>
-            <p className="hover:underline">@nikeshchaudhary</p>
-          </div>
-          <div>
-            <Link to="/about">about</Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex">
-        <div className="flex flex-col gap-10 mt-20 w-1/4">
-          <div className="flex items-center gap-2">
-            <p>projects</p>
-            <HiArrowTurnRightDown />
-          </div>
-
-          <div className="flex flex-col transition-all text-black hover:text-gray-500 duration-200">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className={`flex gap-20 w-fit cursor-pointer ${
-                  hoveredIndex === index && "hover:text-black"
-                }`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => handleProjectSelect(index)}
-              >
-                <span>{101 + index}</span>
-                <span>{project.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col mx-auto mt-20 gap-5">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className={`w-96 h-20 flex items-center justify-center gap-10 text-white font-semibold transition-all duration-300 ease-in-out relative overflow-hidden cursor-pointer
-        ${hoveredIndex === index ? "scale-110" : "scale-100"}`}
-              style={{
-                backgroundImage: `url(${project.homeUrl})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              onClick={() => handleProjectSelect(index)}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+    <div className="relative h-screen w-full overflow-hidden">
+      {/* INTRO ANIMATION */}
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            className="fixed inset-0 bg-white flex items-center justify-center z-50"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            {/* vertical line */}
+            <motion.div
+              className="w-[1px] bg-black absolute"
+              initial={{ height: 0 }}
+              animate={{ height: "100%" }}
+              transition={{ duration: 1 }}
+            />
+            {/* N and C */}
+            <motion.div
+              className="absolute text-black text-xl font-bold left-[47%]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
             >
-              <div
-                className={`absolute inset-0 transition-all duration-300 ease-in-out  ${
-                  hoveredIndex === index ? "bg-transparent" : "bg-black/50"
-                } `}
-              ></div>
+              N
+            </motion.div>
+            <motion.div
+              className="absolute text-black text-xl font-bold left-[52%]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
+            >
+              C
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* MAIN CONTENT */}
+      {!showIntro && (
+        <motion.div
+          className="uppercase p-8 text-[10px] font-semibold flex flex-col gap-10 h-screen"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Header */}
+          <div className="flex justify-between">
+            <h1 className="text-6xl font-normal monoton">
+              Nikesh <br />
+              Chaudhary
+            </h1>
+            <div className="gap-10 flex flex-col transition-all duration-100">
+              <div>
+                <p className="hover:underline">download resume</p>
+                <p className="hover:underline">@nikeshchaudhary</p>
+              </div>
+              <div>
+                <Link to="/about">about</Link>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="w-1/4"></div>
-      </div>
+          {/* Projects + Cards */}
+          <div className="flex">
+            {/* Left List with Rain Effect */}
+            <motion.div
+              className="flex flex-col mt-20 w-1/4"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: { staggerChildren: 0.1 },
+                },
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <p>projects</p>
+                <HiArrowTurnRightDown />
+              </div>
 
-      <div className="flex mt-auto justify-between w-full">
-        <div>{time}</div>
-        <div>Full stack developer</div>
-      </div>
+              {projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { y: -50, opacity: 0 },
+                    visible: { y: 0, opacity: 1 },
+                  }}
+                  transition={{ duration: 0.6 }}
+                  className={`flex gap-20 w-fit cursor-pointer`}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() => handleProjectSelect(index)}
+                >
+                  <span>{101 + index}</span>
+                  <span>{project.name}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Cards with paper-fold */}
+            <motion.div
+              className="flex flex-col mx-auto mt-20 gap-5"
+              initial={{ rotateX: 90, opacity: 0, y: 100 }}
+              animate={{ rotateX: 0, opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              {projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  className={`w-96 h-20 flex items-center justify-center gap-10 text-white font-semibold transition-all duration-300 ease-in-out relative overflow-hidden cursor-pointer
+              ${hoveredIndex === index ? "scale-110" : "scale-100"}`}
+                  style={{
+                    backgroundImage: `url(${project.homeUrl})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  onClick={() => handleProjectSelect(index)}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  initial={{ rotateX: 90, opacity: 0 }}
+                  animate={{ rotateX: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                >
+                  <div
+                    className={`absolute inset-0 transition-all duration-300 ease-in-out  ${
+                      hoveredIndex === index ? "bg-transparent" : "bg-black/50"
+                    } `}
+                  ></div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <div className="w-1/4"></div>
+          </div>
+
+          {/* Footer */}
+          <div className="flex mt-auto justify-between w-full">
+            <div>{time}</div>
+            <div>Full stack developer</div>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
