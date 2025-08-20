@@ -13,7 +13,7 @@ export default function About() {
         <h1 className="sm:text-6xl text-3xl font-normal monoton">about</h1>
         <div
           onClick={() => navigate(-1)}
-          className="gap-5 flex items-center cursor-pointer transition-all duration-100"
+          className="gap-5 flex items-center w-full sm:w-40 justify-end cursor-pointer transition-all duration-100"
         >
           <div className="w-20 border-t hidden sm:block border-black" />
           <IoIosClose size={24} />

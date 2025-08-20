@@ -52,9 +52,14 @@ function ProjectCarousel({
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (window.innerWidth > 768) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      if (window.innerWidth > 768) {
+        document.removeEventListener("mousedown", handleClickOutside);
+      }
     };
   }, [setProjectSelected]);
 

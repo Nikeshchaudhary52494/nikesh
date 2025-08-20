@@ -18,8 +18,8 @@ export const projects = [
     description:
       "Social feed app with independent microservices for auth, profiles, and posts. Uses RabbitMQ for async communication and Nginx API Gateway for routing and scalability.",
     tools: ["Spring Boot", "PostgreSQL", "RabbitMQ", "Nginx", "Docker Compose"],
+    imageUrl: "microfeed.png",
     githubUrl: "https://github.com/Nikeshchaudhary52494/microfeed.git",
-    liveUrl: "https://microfeed.com",
     homeUrl: "chainsaw.png",
   },
   {
@@ -64,8 +64,8 @@ export const projects = [
     description:
       "Authentication service with OTP email verification, JWT-based login, secure password reset, and centralized exception handling. Containerized with MySQL and Spring Boot 3.",
     tools: ["Java 21", "Spring Boot 3", "Spring Security", "MySQL", "JWT"],
+    imageUrl: "authify.png",
     githubUrl: "https://github.com/Nikeshchaudhary52494/authify.git",
-    liveUrl: "https://authify.com",
     homeUrl: "deathnote.png",
   },
   {

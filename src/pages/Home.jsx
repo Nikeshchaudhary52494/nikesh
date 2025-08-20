@@ -28,6 +28,7 @@ export default function Home() {
         projects={projects}
         projectSelected={projectSelected}
         setProjectSelected={setProjectSelected}
+        setHoveredIndex={setHoveredIndex}
       />
     );
   }
@@ -58,7 +59,7 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row justify-between gap-5">
           <motion.div
-            className="sm:flex flex-col sm:mt-20 w-1/4 "
+            className="sm:flex flex-col sm:mt-20 w-1/4 gap-10 "
             initial="hidden"
             animate="visible"
             variants={{
@@ -72,24 +73,25 @@ export default function Home() {
               <p>projects</p>
               <HiArrowTurnRightDown />
             </div>
-
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                variants={{
-                  hidden: { y: -50, opacity: 0 },
-                  visible: { y: 0, opacity: 1 },
-                }}
-                transition={{ duration: 0.6 }}
-                className={`sm:flex gap-20 w-fit hidden cursor-pointer`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => handleProjectSelect(index)}
-              >
-                <span>{101 + index}</span>
-                <span>{project.name}</span>
-              </motion.div>
-            ))}
+            <div className="hover:text-gray-500">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { y: -50, opacity: 0 },
+                    visible: { y: 0, opacity: 1 },
+                  }}
+                  transition={{ duration: 0.6 }}
+                  className={`sm:flex gap-20 w-fit hover:text-black hidden cursor-pointer`}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() => handleProjectSelect(index)}
+                >
+                  <span>{101 + index}</span>
+                  <span>{project.name}</span>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
           <motion.div
@@ -106,7 +108,7 @@ export default function Home() {
                 </div>
                 <motion.div
                   key={index}
-                  className={`h-20 w-full sm:w-96 flex items-center justify-center gap-10 text-white font-semibold transition-all duration-300 ease-in-out relative overflow-hidden cursor-pointer
+                  className={`h-20 w-full sm:w-md flex items-center justify-center gap-10 text-white font-semibold transition-all duration-300 ease-in-out relative overflow-hidden cursor-pointer
               ${hoveredIndex === index ? "scale-110" : "scale-100"}`}
                   style={{
                     backgroundImage: `url(${project.homeUrl})`,

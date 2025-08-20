@@ -2,11 +2,13 @@ import { BiExpandAlt } from "react-icons/bi";
 import ProjectCarousel from "./ProjectCarousel";
 import { GoArrowUpRight } from "react-icons/go";
 import { useRef } from "react";
+import { MdArrowBackIos } from "react-icons/md";
 
 export default function ProjectDetails({
   projectSelected,
   projects,
   setProjectSelected,
+  setHoveredIndex,
 }) {
   const githubUrlRef = useRef(null);
   const liveUrlRef = useRef(null);
@@ -23,10 +25,21 @@ export default function ProjectDetails({
       </div>
 
       <div className="sm:hidden">
+        <div className="flex items-center justify-end py-2">
+          <MdArrowBackIos />
+          <p
+            onClick={() => {
+              setProjectSelected(null);
+              setHoveredIndex(null);
+            }}
+          >
+            back
+          </p>
+        </div>
         <img
           src={projects[projectSelected].imageUrl}
           alt={projects[projectSelected].name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain aspect-video"
         />
       </div>
       <div className="flex justify-center items-center sm:flex-row flex-col-reverse sm:flex-1 gap-5 relative">
@@ -68,21 +81,23 @@ export default function ProjectDetails({
             ref={githubUrlRef}
             className="flex items-center gap-3"
           >
-            <p className="hover:underline cursor-pointer">Open</p>
+            <p className="hover:underline cursor-pointer">Github</p>
             <BiExpandAlt className="text-base" />
             <div className="w-8 border-t border-black hidden sm:block"></div>
           </div>
-          <div
-            onClick={() =>
-              window.open(projects[projectSelected].liveUrl, "_blank")
-            }
-            ref={liveUrlRef}
-            className="flex items-center gap-3"
-          >
-            <p className="hover:underline cursor-pointer">View Live</p>
-            <GoArrowUpRight className="text-base" />
-            <div className="w-8 border-t border-black hidden sm:block"></div>
-          </div>
+          {projects[projectSelected].liveUrl && (
+            <div
+              onClick={() =>
+                window.open(projects[projectSelected].liveUrl, "_blank")
+              }
+              ref={liveUrlRef}
+              className="flex items-center gap-3"
+            >
+              <p className="hover:underline cursor-pointer">View Live</p>
+              <GoArrowUpRight className="text-base" />
+              <div className="w-8 border-t border-black hidden sm:block"></div>
+            </div>
+          )}
         </div>
       </div>
     </div>
