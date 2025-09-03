@@ -99,9 +99,9 @@ export const sections = [
   {
     title: "Socials",
     content: [
-      { text: "Github", href: "#" },
-      { text: "LinkedIn", href: "#" },
-      { text: "Twitter", href: "#" },
+      { text: "Github", href: "https://github.com/Nikeshchaudhary52494" },
+      { text: "LinkedIn", href: "https://www.linkedin.com/in/nikesh-chaudhary-534ba2230/" },
+      { text: "Twitter", href: "https://x.com/nikesh_003" },
     ],
     isLinks: true,
   },

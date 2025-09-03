@@ -47,9 +47,21 @@ export default function Home() {
             Chaudhary
           </h1>
           <div className="gap-10 flex flex-col transition-all duration-100">
-            <div className="hidden sm:block">
-              <p className="hover:underline">download resume</p>
-              <p className="hover:underline">@nikeshchaudhary</p>
+            <div className="hidden sm:flex flex-col">
+              <a
+                href="/nikesh.pdf"
+                download
+                className="hover:underline cursor-pointer"
+              >
+                download resume
+              </a>
+
+              <a
+                href="mailto:nikeshchaudhary52494@gmail.com"
+                className="hover:underline"
+              >
+                @nikeshchaudhary
+              </a>
             </div>
             <div>
               <Link to="/about">about</Link>

@@ -99,7 +99,7 @@ export default function About() {
           </a>
           <p>@nikesh.dev</p>
         </div>
-        <p>Frontend Dev</p>
+        <p>Full stack developer</p>
       </div>
     </div>
   );
