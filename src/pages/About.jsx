@@ -94,8 +94,8 @@ export default function About() {
 
       <div className="flex justify-between mt-auto text-[11px]">
         <div>
-          <a href="/resume.pdf" className="hover:underline">
-            Download Resume
+          <a href="/nikesh.pdf" className="hover:underline">
+            View Resume
           </a>
           <p>@nikesh.dev</p>
         </div>
